@@ -1,0 +1,42 @@
+{
+  "_readme": "Меню для ролика. Меняйте названия, цены и пути к фото здесь. photo — путь внутри папки public/ (например \"photos/shawarma.png\", лучше PNG без фона). null — используется иллюстрация. Если указать brand.logo (например \"brand/logo.png\") — вместо текстового логотипа будет картинка. brand.address — подтверждённый адрес точки, покажется под призывом.",
+  "brand": {
+    "name": "Muslim Food",
+    "logo": null,
+    "address": null
+  },
+  "colors": {
+    "background": "#F7ECDA",
+    "backgroundDeep": "#EEDABA",
+    "text": "#2A2A2D",
+    "accent": "#E2402A",
+    "onAccent": "#FFF6E8"
+  },
+  "currency": "₸",
+  "hook": ["Что", "берём", "сегодня?"],
+  "cta": "Заходи за своим!",
+  "items": [
+    {
+      "id": "shawarma",
+      "title": "Шаурма с курицей",
+      "price": 1990,
+      "photo": null,
+      "illustration": "shawarma"
+    },
+    {
+      "id": "burger",
+      "title": "Чизбургер с говядиной",
+      "price": 1900,
+      "photo": null,
+      "illustration": "burger"
+    },
+    {
+      "id": "combo",
+      "title": "Комбо с куриной шаурмой",
+      "badge": "КОМБО",
+      "price": 3000,
+      "photo": null,
+      "illustration": "shawarma"
+    }
+  ]
+}

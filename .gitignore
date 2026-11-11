@@ -1,0 +1,4 @@
+node_modules/
+out/*
+!out/Muslim_Food_Reels.mp4
+.DS_Store
