@@ -34,6 +34,7 @@ npm run final    # финал 1080×1920, concurrency=1 → out/Muslim_Food_Reel
 - Знак G-Launcher в SVG: `src/glauncher/Logo.tsx`.
 - Озвучка ElevenLabs (голос «Mark — уверенный и четкий»): `public/glauncher/vo.mp3`. Второй дубль лежит в `vo_take2.mp3`.
 - Музыка `public/glauncher/music.wav` синтезирована скриптом `npm run glauncher:music`.
+- Звуки эффектов `public/glauncher/sfx/` (переходы, галочки, набор БИН, карточки, логотип) создаёт `npm run glauncher:sfx`. Когда и с какой громкостью они звучат, задаёт список `SFX` в `GLauncherReels.tsx`.
 
 ```bash
 npm run glauncher   # рендер + FFmpeg (громкость под Reels) → out/G-Launcher_BIN_reels.mp4
