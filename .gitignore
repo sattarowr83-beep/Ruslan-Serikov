@@ -1,4 +1,5 @@
 node_modules/
 out/*
 !out/Muslim_Food_Reels.mp4
+!out/G-Launcher_BIN_reels.mp4
 .DS_Store

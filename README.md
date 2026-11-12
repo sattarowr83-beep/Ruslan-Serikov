@@ -23,3 +23,18 @@ npm run final    # финал 1080×1920, concurrency=1 → out/Muslim_Food_Reel
 - `src/MuslimFoodReels.tsx` — сцены, камера, свайпы, звук
 - `src/timing.ts` — тайминги в кадрах и безопасные зоны под интерфейс Reels
 - `src/food/` — SVG-иллюстрации шаурмы и чизбургера
+
+---
+
+# G-Launcher — ролик «Сравни баллы за опыт по БИН»
+
+Готовое видео: **`out/G-Launcher_BIN_reels.mp4`** (1080×1920, 30 fps, 36 с, громкость −14 LUFS).
+
+- Композиция `GLauncherBIN`: `src/glauncher/GLauncherReels.tsx`. Тайминги сцен в объекте `T` привязаны к паузам в озвучке.
+- Знак G-Launcher в SVG: `src/glauncher/Logo.tsx`.
+- Озвучка ElevenLabs (голос «Mark — уверенный и четкий»): `public/glauncher/vo.mp3`. Второй дубль лежит в `vo_take2.mp3`.
+- Музыка `public/glauncher/music.wav` синтезирована скриптом `npm run glauncher:music`.
+
+```bash
+npm run glauncher   # рендер + FFmpeg (громкость под Reels) → out/G-Launcher_BIN_reels.mp4
+```

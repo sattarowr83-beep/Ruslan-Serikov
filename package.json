@@ -6,7 +6,9 @@
     "studio": "remotion studio",
     "sfx": "python scripts/make_sfx.py",
     "draft": "remotion render MuslimFoodReels out/draft_540x960.mp4 --scale=0.5 --concurrency=1 --codec=h264",
-    "final": "remotion render MuslimFoodReels out/render_raw.mp4 --concurrency=1 --codec=h264 --crf=16 && npx remotion ffmpeg -y -i out/render_raw.mp4 -t 15 -vf scale=in_range=pc:out_range=tv,format=yuv420p -c:v libx264 -preset slow -crf 17 -profile:v high -level 4.1 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -movflags +faststart out/Muslim_Food_Reels.mp4"
+    "final": "remotion render MuslimFoodReels out/render_raw.mp4 --concurrency=1 --codec=h264 --crf=16 && npx remotion ffmpeg -y -i out/render_raw.mp4 -t 15 -vf scale=in_range=pc:out_range=tv,format=yuv420p -c:v libx264 -preset slow -crf 17 -profile:v high -level 4.1 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -c:a aac -b:a 192k -ar 48000 -movflags +faststart out/Muslim_Food_Reels.mp4",
+    "glauncher": "remotion render GLauncherBIN out/glauncher_raw.mp4 --concurrency=1 --codec=h264 --crf=16 && npx remotion ffmpeg -y -i out/glauncher_raw.mp4 -t 36 -vf scale=in_range=pc:out_range=tv,format=yuv420p -c:v libx264 -preset slow -crf 17 -profile:v high -level 4.1 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -af loudnorm=I=-14:TP=-1.5:LRA=7 -c:a aac -b:a 192k -ar 48000 -movflags +faststart out/G-Launcher_BIN_reels.mp4",
+    "glauncher:music": "python scripts/make_glauncher_music.py"
   },
   "repository": {
     "type": "git",
