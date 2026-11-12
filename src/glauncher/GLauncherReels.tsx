@@ -843,7 +843,7 @@ type Sfx = [number, string, number];
 const SFX: Sfx[] = (() => {
   const ev: Sfx[] = [];
   const add = (frame: number, name: string, vol: number) => ev.push([Math.max(0, Math.round(frame)), name, vol]);
-  const W = 0.14; // переходы
+  const W = 0.07; // переходы
   const UI = 0.11; // появление элементов
   const typing = (at: number, cps: number, len: number) => {
     for (let k = 1; k <= len; k++) add(S(at) + (k * GL_FPS) / cps, `key${k % 4}`, 0.07);
