@@ -881,11 +881,11 @@ export const GLauncherReels: React.FC = () => (
     />
     {WHOOSH_AT.map((s) => (
       <Sequence key={s} from={Math.max(0, S(s) - 4)} durationInFrames={20}>
-        <Html5Audio src={staticFile('sfx/swipe.wav')} volume={0.28} />
+        <Html5Audio src={staticFile('glauncher/soft_whoosh.wav')} volume={0.14} />
       </Sequence>
     ))}
     <Sequence from={S(T.useful)} durationInFrames={20}>
-      <Html5Audio src={staticFile('sfx/thump.wav')} volume={0.35} />
+      <Html5Audio src={staticFile('glauncher/soft_pop.wav')} volume={0.175} />
     </Sequence>
   </AbsoluteFill>
 );
