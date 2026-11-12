@@ -843,59 +843,58 @@ type Sfx = [number, string, number];
 const SFX: Sfx[] = (() => {
   const ev: Sfx[] = [];
   const add = (frame: number, name: string, vol: number) => ev.push([Math.max(0, Math.round(frame)), name, vol]);
-  const W = 0.07; // переходы
-  const UI = 0.11; // появление элементов
+  const W = 0.09; // переходы между кадрами
+  const UI = 0.12; // появление элементов
+  const KEY = 0.16; // клавиатура при вводе БИН
+  // стук клавиш: по одному на каждую цифру, с лёгкой неровностью громкости
   const typing = (at: number, cps: number, len: number) => {
-    for (let k = 1; k <= len; k++) add(S(at) + (k * GL_FPS) / cps, `key${k % 4}`, 0.07);
+    for (let k = 1; k <= len; k++) add(S(at) + (k * GL_FPS) / cps, `key${(k * 5) % 6}`, KEY * (0.8 + 0.2 * ((k * 7) % 3) / 2));
   };
   const ticks = (from: number, frames: number, every: number, vol: number, name = 'count_tick') => {
     for (let x = 0; x < frames; x += every) add(from + x, name, vol);
   };
 
   // «Знакомо?»
-  add(0, 'bubble', UI);
-  add(4, 'pop', UI);
-  // Заявка: переход, галочки по возрастающей, тикание часов
-  add(S(T.prep) - 4, 'whoosh_a', W);
-  CHECKS.forEach((_, i) => add(S(T.prep) + 8 + i * 9, `check${i}`, UI));
-  ticks(S(T.prep) + 6, S(T.results) - S(T.prep) - 10, 6, 0.045, 'clock_tick');
-  // Итоги: переход, счётчики, «минус»
-  add(S(T.results) - 4, 'whoosh_b', W);
-  add(S(T.worse) + 2, 'pop_low', UI);
-  ticks(S(T.worse), 24, 3, 0.05);
-  add(S(T.worse) + 26, 'tone_down', UI);
+  add(2, 'tap_low', UI);
+  // Заявка: переход, галочки, тикание часов
+  add(S(T.prep) - 6, 'whoosh_a', W);
+  CHECKS.forEach((_, i) => add(S(T.prep) + 8 + i * 9, `tick${i}`, UI));
+  ticks(S(T.prep) + 6, S(T.results) - S(T.prep) - 10, 6, 0.04, 'clock_tick');
+  // Итоги: переход, счётчики, глухой «минус»
+  add(S(T.results) - 6, 'whoosh_b', W);
+  add(S(T.worse) + 2, 'tap', UI);
+  ticks(S(T.worse), 24, 3, 0.045);
+  add(S(T.worse) + 24, 'drop', UI);
   // «Знал бы заранее…»
-  add(S(T.think) - 4, 'whoosh_c', W);
-  add(S(T.quote) - 2, 'sigh', 0.12);
-  // Логотип
-  add(S(T.logo) - 4, 'whoosh_a', W);
-  add(S(T.logo) + 4, 'shimmer', UI);
-  add(S(T.logo) + 15, 'pop_low', 0.09);
-  // Свой БИН: набор, карточка, счётчик, чип категории
-  add(S(T.myBin) - 4, 'whoosh_b', W);
+  add(S(T.think) - 6, 'whoosh_c', W);
+  add(S(T.quote) - 2, 'breath', 0.1);
+  add(S(T.quote) + 2, 'tap_low', 0.09);
+  // Логотип: воздушный подъём и мягкий низкий «бум»
+  add(S(T.logo) - 8, 'reveal', 0.16);
+  // Свой БИН: клавиатура, карточка, счётчик, чип категории
+  add(S(T.myBin) - 6, 'whoosh_b', W);
   typing(T.myBin + 0.25, 14, MY_BIN.length);
-  add(S(T.myScore), 'pop', UI);
-  ticks(S(T.myScore + 0.2), 30, 3, 0.05);
-  add(S(T.category) + 2, 'blip1', UI);
-  // БИН конкурента: набор, рост полосок
-  add(S(T.rivalBin) - 4, 'whoosh_c', W);
+  add(S(T.myScore), 'tap', UI);
+  ticks(S(T.myScore + 0.2), 30, 3, 0.045);
+  add(S(T.category) + 2, 'tick2', UI);
+  // БИН конкурента: клавиатура, рост полосок
+  add(S(T.rivalBin) - 6, 'whoosh_c', W);
   typing(T.rivalBin + 0.2, 16, RIVAL_BIN.length);
-  add(S(T.rivalBin) + 30, 'sweep_up', UI);
+  add(S(T.rivalBin) + 28, 'rise', UI);
   // Победы конкурента: строки по очереди
-  add(S(T.wins) - 4, 'whoosh_a', W);
-  WINS.forEach((_, i) => add(S(T.wins) + 10 + i * 7, `blip${i}`, UI));
+  add(S(T.wins) - 6, 'whoosh_a', W);
+  WINS.forEach((_, i) => add(S(T.wins) + 10 + i * 7, `tick${i}`, UI));
   // «Реально полезно»: галочка, текст, карточка преимущества
-  add(S(T.useful) - 4, 'whoosh_b', W);
-  add(S(T.useful) + 3, 'chime_up', UI);
-  add(S(T.before) + 1, 'pop_low', 0.08);
-  add(S(T.edge) + 2, 'pop', UI);
+  add(S(T.useful) - 6, 'whoosh_b', W);
+  add(S(T.useful) + 3, 'confirm', 0.14);
+  add(S(T.before) + 1, 'tap_low', 0.08);
+  add(S(T.edge) + 2, 'tap', UI);
   // Финал: значок, кнопка, подпись, ссылка
-  add(S(T.cta) - 4, 'whoosh_c', W);
-  add(S(T.cta) + 2, 'shimmer', 0.09);
-  add(S(T.cta) + 12, 'button', UI);
-  add(S(T.compare) + 1, 'blip2', 0.09);
-  add(S(T.link) + 2, 'pop', UI);
-  add(S(T.link) + 8, 'blip3', 0.08);
+  add(S(T.cta) - 6, 'whoosh_c', W);
+  add(S(T.cta) + 2, 'tap_low', UI);
+  add(S(T.cta) + 12, 'button', 0.14);
+  add(S(T.compare) + 1, 'tick1', 0.09);
+  add(S(T.link) + 2, 'tap', UI);
   return ev;
 })();
 
@@ -939,7 +938,7 @@ export const GLauncherReels: React.FC = () => (
       volume={(f) => interpolate(f, [0, S(T.cta), S(T.cta) + 10, GL_DURATION - 20, GL_DURATION], [0.16, 0.16, 0.22, 0.22, 0], CL)}
     />
     {SFX.map(([frame, name, vol], i) => (
-      <Sequence key={i} from={frame} durationInFrames={45}>
+      <Sequence key={i} from={frame} durationInFrames={60}>
         <Html5Audio src={staticFile(`glauncher/sfx/${name}.wav`)} volume={vol} />
       </Sequence>
     ))}
